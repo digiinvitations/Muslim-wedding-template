@@ -26,69 +26,62 @@ export default function ImageUploader({ label, value, onChange, accept = "image/
     const file = e.target.files?.[0];
     if (!file) return;
 
+    if (!file.type.startsWith("image/")) {
+      alert("Only images can be uploaded directly. For videos/audio, please use the Link option.");
+      return;
+    }
+
     setIsUploading(true);
     setProgress(20);
 
-    if (file.type.startsWith("image/")) {
-      // Compress image
-      const img = document.createElement("img");
-      const reader = new FileReader();
-      
-      reader.onload = (e) => {
-        img.src = e.target?.result as string;
-        img.onload = () => {
-          const canvas = document.createElement("canvas");
-          let width = img.width;
-          let height = img.height;
-          
-          // Max width/height
-          const MAX_SIZE = 600;
-          if (width > height) {
-            if (width > MAX_SIZE) {
-              height *= MAX_SIZE / width;
-              width = MAX_SIZE;
-            }
-          } else {
-            if (height > MAX_SIZE) {
-              width *= MAX_SIZE / height;
-              height = MAX_SIZE;
-            }
+    const img = document.createElement("img");
+    const reader = new FileReader();
+    
+    reader.onload = (e) => {
+      img.src = e.target?.result as string;
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        let width = img.width;
+        let height = img.height;
+        
+        // Max width/height - highly compressed to stay under Firestore 1MB limits
+        const MAX_SIZE = 500;
+        if (width > height) {
+          if (width > MAX_SIZE) {
+            height *= MAX_SIZE / width;
+            width = MAX_SIZE;
           }
-          
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext("2d");
-          ctx?.drawImage(img, 0, 0, width, height);
-          
-          // Convert to base64 with lower quality (0.5)
-          const base64String = canvas.toDataURL("image/jpeg", 0.5);
-          onChange(base64String);
-          setIsUploading(false);
-          setProgress(100);
-        };
-      };
-      reader.onerror = () => {
-        console.error("Failed to read file");
-        setIsUploading(false);
-        setProgress(0);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      // For audio/video just read as data URL (might still be large, but usually we prefer URLs for these)
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = reader.result as string;
+        } else {
+          if (height > MAX_SIZE) {
+            width *= MAX_SIZE / height;
+            height = MAX_SIZE;
+          }
+        }
+        
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        
+        // Fill with white background in case of transparent pngs converted to jpeg/webp
+        if (ctx) {
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, width, height);
+          ctx.drawImage(img, 0, 0, width, height);
+        }
+        
+        // Convert to webp with lower quality (0.5)
+        const base64String = canvas.toDataURL("image/webp", 0.5);
         onChange(base64String);
         setIsUploading(false);
         setProgress(100);
       };
-      reader.onerror = () => {
-        console.error("Failed to read file");
-        setIsUploading(false);
-        setProgress(0);
-      };
-      reader.readAsDataURL(file);
-    }
+    };
+    reader.onerror = () => {
+      console.error("Failed to read file");
+      setIsUploading(false);
+      setProgress(0);
+    };
+    reader.readAsDataURL(file);
   };
 
   return (

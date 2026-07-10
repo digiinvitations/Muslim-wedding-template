@@ -20,56 +20,98 @@ export function WeddingProvider({ children }: { children: React.ReactNode }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const docRef = doc(db, "wedding", "main");
+    let initialLoadCount = 0;
+    const handleLoad = () => {
+      initialLoadCount++;
+      if (initialLoadCount >= 3) {
+        setIsLoaded(true);
+      }
+    };
+
+    const mainRef = doc(db, "wedding", "main");
+    const ceremoniesRef = doc(db, "wedding", "ceremonies");
+    const galleryRef = doc(db, "wedding", "gallery");
     
     // Subscribe to changes in the database in real-time
-    const unsubscribe = onSnapshot(docRef, (docSnap) => {
+    const unsubMain = onSnapshot(mainRef, (docSnap) => {
       if (docSnap.exists()) {
-        setDataState(docSnap.data() as WeddingData);
+        setDataState(prev => ({ ...prev, ...docSnap.data() }));
       } else {
-        // If not found in Firestore, initialize with local storage or default
-        const saved = localStorage.getItem("weddingData");
-        let initialData = defaultWeddingData;
-        if (saved) {
-          try {
-            initialData = JSON.parse(saved);
-          } catch (e) {
-            console.error("Failed to parse local storage wedding data", e);
-          }
-        }
-        
-        setDoc(docRef, initialData).catch((err) => {
-          console.error("Failed to initialize firestore document:", err);
-        });
-        setDataState(initialData);
+        // Initialize main
+        setDoc(mainRef, {
+          opening: defaultWeddingData.opening,
+          hero: defaultWeddingData.hero,
+          couple: defaultWeddingData.couple,
+          journey: defaultWeddingData.journey,
+          quranVerse: defaultWeddingData.quranVerse,
+          dua: defaultWeddingData.dua,
+          family: defaultWeddingData.family,
+          venue: defaultWeddingData.venue,
+          theme: defaultWeddingData.theme,
+        }).catch(console.error);
       }
-      setIsLoaded(true);
+      handleLoad();
     }, (error) => {
-      console.error("Firestore onSnapshot error:", error);
-      // Fallback to local storage if Firestore fails
-      const saved = localStorage.getItem("weddingData");
-      if (saved) {
-        try {
-          setDataState(JSON.parse(saved));
-        } catch (e) {
-          console.error("Failed to parse local storage wedding data", e);
-        }
-      }
-      setIsLoaded(true);
+      console.error("Firestore onSnapshot error (main):", error);
+      handleLoad();
     });
 
-    return () => unsubscribe();
+    const unsubCeremonies = onSnapshot(ceremoniesRef, (docSnap) => {
+      if (docSnap.exists()) {
+        setDataState(prev => ({ ...prev, ceremonies: docSnap.data().ceremonies }));
+      } else {
+        setDoc(ceremoniesRef, { ceremonies: defaultWeddingData.ceremonies }).catch(console.error);
+      }
+      handleLoad();
+    }, (error) => {
+      console.error("Firestore onSnapshot error (ceremonies):", error);
+      handleLoad();
+    });
+
+    const unsubGallery = onSnapshot(galleryRef, (docSnap) => {
+      if (docSnap.exists()) {
+        setDataState(prev => ({ ...prev, gallery: docSnap.data().gallery }));
+      } else {
+        setDoc(galleryRef, { gallery: defaultWeddingData.gallery }).catch(console.error);
+      }
+      handleLoad();
+    }, (error) => {
+      console.error("Firestore onSnapshot error (gallery):", error);
+      handleLoad();
+    });
+
+    // Fallback to local storage if needed on first load
+    const saved = localStorage.getItem("weddingData");
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        setDataState(prev => ({ ...prev, ...parsed }));
+      } catch (e) {
+        console.error("Failed to parse local storage wedding data", e);
+      }
+    }
+
+    return () => {
+      unsubMain();
+      unsubCeremonies();
+      unsubGallery();
+    };
   }, []);
 
   const setData = (newData: WeddingData | ((prev: WeddingData) => WeddingData)) => {
     setDataState((prev) => {
       const resolvedData = typeof newData === "function" ? newData(prev) : newData;
       
-      // Save asynchronously to Firestore for global access
-      const docRef = doc(db, "wedding", "main");
-      setDoc(docRef, resolvedData).catch((err) => {
-        console.error("Failed to update firestore wedding data:", err);
-      });
+      // Save asynchronously to Firestore for global access (split to avoid 1MB limit)
+      const mainRef = doc(db, "wedding", "main");
+      const ceremoniesRef = doc(db, "wedding", "ceremonies");
+      const galleryRef = doc(db, "wedding", "gallery");
+      
+      const { ceremonies, gallery, ...mainData } = resolvedData;
+
+      setDoc(mainRef, mainData).catch(console.error);
+      setDoc(ceremoniesRef, { ceremonies }).catch(console.error);
+      setDoc(galleryRef, { gallery }).catch(console.error);
       
       localStorage.setItem("weddingData", JSON.stringify(resolvedData));
       return resolvedData;
