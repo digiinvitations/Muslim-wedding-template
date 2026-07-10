@@ -15,14 +15,18 @@ import { MoonStar } from "lucide-react";
 import NextLink from "next/link";
 
 const Divider = () => (
-  <div className="flex items-center justify-center py-12 bg-white relative z-20">
-    <div className="w-24 md:w-32 h-px bg-gradient-to-r from-transparent to-[#d4af37]/50" />
-    <div className="mx-4 text-[#d4af37]">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+  <div className="flex items-center justify-center py-16 bg-white relative z-20 overflow-hidden">
+    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-[0.02]" />
+    <div className="w-24 md:w-48 h-[2px] bg-gradient-to-r from-transparent via-[#d4af37]/60 to-[#d4af37]/10" />
+    <div className="mx-6 text-[#d4af37] flex items-center gap-2 relative">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-[#d4af37]/10 rounded-full blur-md" />
+      <span className="text-xl">✧</span>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="animate-[spin_20s_linear_infinite]">
         <path d="M12 2L15 9L22 9L16 14L18 21L12 17L6 21L8 14L2 9L9 9L12 2Z" />
       </svg>
+      <span className="text-xl">✧</span>
     </div>
-    <div className="w-24 md:w-32 h-px bg-gradient-to-l from-transparent to-[#d4af37]/50" />
+    <div className="w-24 md:w-48 h-[2px] bg-gradient-to-l from-transparent via-[#d4af37]/60 to-[#d4af37]/10" />
   </div>
 );
 

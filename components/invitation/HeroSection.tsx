@@ -15,6 +15,19 @@ export default function HeroSection() {
       <div className="absolute inset-4 md:inset-8 border border-emerald-800/40 pointer-events-none z-10 rounded-2xl" />
       <div className="absolute inset-[20px] md:inset-[38px] border-2 border-emerald-800/20 pointer-events-none z-10 rounded-xl" />
 
+      {/* Ornate Corners */}
+      <div className="absolute top-6 left-6 md:top-10 md:left-10 w-12 h-12 md:w-20 md:h-20 border-t-4 border-l-4 border-[#d4af37] rounded-tl-xl opacity-80 z-10 pointer-events-none" />
+      <div className="absolute top-8 left-8 md:top-14 md:left-14 w-8 h-8 md:w-12 md:h-12 border-t-2 border-l-2 border-[#d4af37] rounded-tl-lg opacity-60 z-10 pointer-events-none" />
+      
+      <div className="absolute top-6 right-6 md:top-10 md:right-10 w-12 h-12 md:w-20 md:h-20 border-t-4 border-r-4 border-[#d4af37] rounded-tr-xl opacity-80 z-10 pointer-events-none" />
+      <div className="absolute top-8 right-8 md:top-14 md:right-14 w-8 h-8 md:w-12 md:h-12 border-t-2 border-r-2 border-[#d4af37] rounded-tr-lg opacity-60 z-10 pointer-events-none" />
+      
+      <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 w-12 h-12 md:w-20 md:h-20 border-b-4 border-l-4 border-[#d4af37] rounded-bl-xl opacity-80 z-10 pointer-events-none" />
+      <div className="absolute bottom-8 left-8 md:bottom-14 md:left-14 w-8 h-8 md:w-12 md:h-12 border-b-2 border-l-2 border-[#d4af37] rounded-bl-lg opacity-60 z-10 pointer-events-none" />
+      
+      <div className="absolute bottom-6 right-6 md:bottom-10 md:right-10 w-12 h-12 md:w-20 md:h-20 border-b-4 border-r-4 border-[#d4af37] rounded-br-xl opacity-80 z-10 pointer-events-none" />
+      <div className="absolute bottom-8 right-8 md:bottom-14 md:right-14 w-8 h-8 md:w-12 md:h-12 border-b-2 border-r-2 border-[#d4af37] rounded-br-lg opacity-60 z-10 pointer-events-none" />
+
       {/* Background Elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-[0.03]" />

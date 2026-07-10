@@ -10,8 +10,13 @@ export default function Ceremonies() {
   const enabledCeremonies = data.ceremonies.filter(c => c.enabled);
 
   return (
-    <section className="py-24 bg-white px-4 relative">
+    <section className="py-24 bg-white px-4 relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-[0.02]" />
+      
+      {/* Decorative Ornaments */}
+      <div className="absolute top-0 right-0 w-32 h-40 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-10 border-l border-b border-[#d4af37]/30 rounded-bl-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-32 h-40 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-10 border-r border-t border-[#d4af37]/30 rounded-tr-[100px] pointer-events-none" />
+      
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

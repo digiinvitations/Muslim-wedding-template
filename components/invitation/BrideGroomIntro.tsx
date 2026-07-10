@@ -11,6 +11,12 @@ export default function BrideGroomIntro() {
     <section className="py-24 bg-gradient-to-b from-white to-emerald-50 relative px-4">
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-[0.03] z-0" />
       
+      {/* Decorative Ornaments */}
+      <div className="absolute top-4 left-4 md:top-8 md:left-8 w-16 h-16 md:w-24 md:h-24 border-t border-l border-[#d4af37]/40 rounded-tl-2xl opacity-60 pointer-events-none" />
+      <div className="absolute top-4 right-4 md:top-8 md:right-8 w-16 h-16 md:w-24 md:h-24 border-t border-r border-[#d4af37]/40 rounded-tr-2xl opacity-60 pointer-events-none" />
+      <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 w-16 h-16 md:w-24 md:h-24 border-b border-l border-[#d4af37]/40 rounded-bl-2xl opacity-60 pointer-events-none" />
+      <div className="absolute bottom-4 right-4 md:bottom-8 md:right-8 w-16 h-16 md:w-24 md:h-24 border-b border-r border-[#d4af37]/40 rounded-br-2xl opacity-60 pointer-events-none" />
+      
       <div className="max-w-5xl mx-auto relative z-10 space-y-24">
         {/* Groom Card */}
         <motion.div 

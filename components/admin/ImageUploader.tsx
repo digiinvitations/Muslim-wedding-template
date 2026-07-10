@@ -37,15 +37,15 @@ export default function ImageUploader({ label, value, onChange, accept = "image/
     const img = document.createElement("img");
     const reader = new FileReader();
     
-    reader.onload = (e) => {
+    reader.onload = async (e) => {
       img.src = e.target?.result as string;
-      img.onload = () => {
+      img.onload = async () => {
         const canvas = document.createElement("canvas");
         let width = img.width;
         let height = img.height;
         
-        // Max width/height - highly compressed to stay under Firestore 1MB limits
-        const MAX_SIZE = 500;
+        // Max width/height
+        const MAX_SIZE = 1200;
         if (width > height) {
           if (width > MAX_SIZE) {
             height *= MAX_SIZE / width;
@@ -62,18 +62,60 @@ export default function ImageUploader({ label, value, onChange, accept = "image/
         canvas.height = height;
         const ctx = canvas.getContext("2d");
         
-        // Fill with white background in case of transparent pngs converted to jpeg/webp
         if (ctx) {
           ctx.fillStyle = "#ffffff";
           ctx.fillRect(0, 0, width, height);
           ctx.drawImage(img, 0, 0, width, height);
         }
         
-        // Convert to webp with lower quality (0.5)
-        const base64String = canvas.toDataURL("image/webp", 0.5);
-        onChange(base64String);
-        setIsUploading(false);
-        setProgress(100);
+        canvas.toBlob(async (blob) => {
+          if (!blob) {
+            setIsUploading(false);
+            setProgress(0);
+            return;
+          }
+          
+          try {
+            // Import dynamically to avoid SSR issues
+            const { storage } = await import("@/lib/firebase");
+            const { ref, uploadBytesResumable, getDownloadURL } = await import("firebase/storage");
+            
+            const filename = `uploads/img_${Date.now()}_${Math.random().toString(36).substring(7)}.webp`;
+            const storageRef = ref(storage, filename);
+            const uploadTask = uploadBytesResumable(storageRef, blob, { contentType: 'image/webp' });
+            
+            uploadTask.on('state_changed', 
+              (snapshot) => {
+                const prog = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                setProgress(Math.max(20, prog));
+              },
+              (error) => {
+                console.error("Upload failed, falling back to Base64:", error);
+                // Fallback to Base64 if Storage fails
+                const base64String = canvas.toDataURL("image/webp", 0.5);
+                onChange(base64String);
+                setIsUploading(false);
+                setProgress(100);
+              },
+              async () => {
+                try {
+                  const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                  onChange(downloadURL);
+                } catch(e) {
+                  const base64String = canvas.toDataURL("image/webp", 0.5);
+                  onChange(base64String);
+                }
+                setIsUploading(false);
+                setProgress(100);
+              }
+            );
+          } catch (err) {
+            console.error("Storage error:", err);
+            alert("Firebase Storage error. Ensure Storage is enabled in your Firebase project.");
+            setIsUploading(false);
+            setProgress(0);
+          }
+        }, "image/webp", 0.8);
       };
     };
     reader.onerror = () => {
