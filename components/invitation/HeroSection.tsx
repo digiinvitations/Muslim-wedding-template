@@ -11,6 +11,10 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-emerald-50 to-white text-center px-4 py-20">
+      {/* Decorative Green Border */}
+      <div className="absolute inset-4 md:inset-8 border border-emerald-800/40 pointer-events-none z-10 rounded-2xl" />
+      <div className="absolute inset-[20px] md:inset-[38px] border-2 border-emerald-800/20 pointer-events-none z-10 rounded-xl" />
+
       {/* Background Elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-[0.03]" />
@@ -31,12 +35,12 @@ export default function HeroSection() {
           className="flex justify-center items-center mb-6"
         >
           {data.hero.iconUrl ? (
-            <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-[#d4af37]/60 shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+            <div className="relative w-24 h-24 md:w-32 md:h-32">
               <Image 
                 src={formatImageUrl(data.hero.iconUrl)} 
                 alt="Hero Icon" 
                 fill 
-                className="object-cover" 
+                className="object-contain" 
                 referrerPolicy="no-referrer"
               />
             </div>
