@@ -1,0 +1,58 @@
+{
+  "collections": {
+    "wedding": {
+      "main": {
+        "opening": {
+          "thumbnailUrl": "string",
+          "videoUrl": "string",
+          "musicUrl": "string"
+        },
+        "hero": {
+          "groomName": "string",
+          "brideName": "string",
+          "date": "string",
+          "iconUrl": "string"
+        },
+        "couple": {
+          "groomParents": "string",
+          "groomIntro": "string",
+          "groomImage": "string",
+          "brideParents": "string",
+          "brideIntro": "string",
+          "brideImage": "string"
+        },
+        "journey": "array",
+        "ceremonies": "array",
+        "quranVerse": {
+          "arabic": "string",
+          "english": "string",
+          "reference": "string"
+        },
+        "dua": "string",
+        "family": {
+          "brideFamily": "array",
+          "groomFamily": "array"
+        },
+        "gallery": "array",
+        "venue": {
+          "name": "string",
+          "address": "string",
+          "mapUrl": "string"
+        },
+        "theme": {
+          "primaryColor": "string",
+          "secondaryColor": "string"
+        }
+      }
+    },
+    "rsvps": {
+      "example_rsvp_id": {
+        "name": "string",
+        "phone": "string",
+        "guests": "number",
+        "message": "string",
+        "timestamp": "string"
+      }
+    }
+  }
+}

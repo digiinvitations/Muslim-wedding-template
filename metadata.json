@@ -1,0 +1,7 @@
+{
+  "name": "Luxury Muslim Wedding Invitation",
+  "description": "An interactive digital invitation builder with full cinematic entry, premium scratch-to-reveal dates, dynamic countdowns, and real-time editing admin panel.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

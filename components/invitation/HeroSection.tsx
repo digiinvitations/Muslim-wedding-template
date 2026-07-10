@@ -1,0 +1,78 @@
+"use client";
+import { formatImageUrl } from "@/lib/utils";
+import { useWedding } from "@/components/WeddingProvider";
+import { motion } from "motion/react";
+import { MoonStar } from "lucide-react";
+
+import Image from "next/image";
+
+export default function HeroSection() {
+  const { data } = useWedding();
+
+  return (
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-emerald-50 to-white text-center px-4 py-20">
+      {/* Background Elements */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-[0.03]" />
+        {/* Silhouette or Pattern */}
+        <div className="absolute bottom-0 w-full h-[40vh] bg-[url('https://picsum.photos/seed/mosquewhite/1920/800')] bg-cover bg-bottom opacity-[0.05] mix-blend-multiply" />
+      </div>
+
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, delay: 0.2 }}
+        className="relative z-10 max-w-3xl mx-auto space-y-8 flex flex-col items-center"
+      >
+        <motion.div 
+          animate={{ scale: [1, 1.15, 1] }} 
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          className="flex justify-center items-center mb-6"
+        >
+          {data.hero.iconUrl ? (
+            <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-[#d4af37]/60 shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+              <Image 
+                src={formatImageUrl(data.hero.iconUrl)} 
+                alt="Hero Icon" 
+                fill 
+                className="object-cover" 
+                referrerPolicy="no-referrer"
+              />
+            </div>
+          ) : (
+            <MoonStar className="w-16 h-16 text-[#d4af37]" strokeWidth={1} />
+          )}
+        </motion.div>
+
+        <p className="text-xl md:text-2xl text-emerald-900 font-serif tracking-[0.2em]">
+          Bismillah-ir-Rahman-ir-Rahim
+        </p>
+        
+        <p className="text-sm md:text-base text-emerald-800/70 tracking-widest uppercase mt-4 font-medium">
+          Together with the blessings of Allah
+        </p>
+        
+        <p className="text-md md:text-lg text-emerald-900/90 font-light mt-2">
+          We cordially invite you for the Nikah Ceremony of
+        </p>
+
+        <div className="py-12 space-y-6 flex flex-col items-center">
+          <h1 className="text-6xl md:text-8xl font-serif text-[#b8860b] font-light">
+            {data.hero.groomName.split(' ')[0]}
+          </h1>
+          <span className="text-emerald-800/40 text-3xl">❤</span>
+          <h1 className="text-6xl md:text-8xl font-serif text-[#b8860b] font-light">
+            {data.hero.brideName.split(' ')[0]}
+          </h1>
+        </div>
+
+        <div className="pt-8">
+          <p className="text-2xl md:text-3xl text-emerald-900 font-serif italic border-t border-[#d4af37]/30 pt-8 inline-block px-12">
+            &quot;In Sha Allah&quot;
+          </p>
+        </div>
+      </motion.div>
+    </section>
+  );
+}
