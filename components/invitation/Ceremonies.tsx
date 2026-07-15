@@ -17,17 +17,27 @@ export default function Ceremonies() {
       <div className="absolute top-0 right-0 w-32 h-40 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-10 border-l border-b border-[#d4af37]/30 rounded-bl-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-32 h-40 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-10 border-r border-t border-[#d4af37]/30 rounded-tr-[100px] pointer-events-none" />
       
+      {/* Corner Diamonds */}
+      <div className="absolute top-8 left-8 w-4 h-4 bg-gradient-to-tr from-[#B8860B] via-[#FFD700] to-[#B8860B] rotate-45 shadow-[0_0_15px_rgba(255,215,0,0.6)] z-20 pointer-events-none opacity-80" />
+      <div className="absolute top-10 left-10 w-2 h-2 bg-[#FFD700] rotate-45 shadow-[0_0_5px_rgba(255,215,0,0.8)] z-20 pointer-events-none" />
+      
+      <div className="absolute bottom-8 right-8 w-4 h-4 bg-gradient-to-tr from-[#B8860B] via-[#FFD700] to-[#B8860B] rotate-45 shadow-[0_0_15px_rgba(255,215,0,0.6)] z-20 pointer-events-none opacity-80" />
+      <div className="absolute bottom-10 right-10 w-2 h-2 bg-[#FFD700] rotate-45 shadow-[0_0_5px_rgba(255,215,0,0.8)] z-20 pointer-events-none" />
+
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-16 relative"
         >
-          <h2 className="text-3xl md:text-5xl text-emerald-900 font-serif tracking-wide">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-24 bg-[#FFD700]/10 rounded-[100px] blur-3xl -z-10" />
+          <h2 className="text-3xl md:text-5xl font-serif tracking-wide bg-gradient-to-r from-[#B8860B] via-[#FFD700] to-[#B8860B] text-transparent bg-clip-text drop-shadow-sm pb-2">
             Wedding Ceremonies
           </h2>
-          <div className="h-px w-24 bg-[#d4af37]/50 mx-auto mt-6" />
+          <div className="h-px w-24 bg-gradient-to-r from-transparent via-[#FFD700] to-transparent mx-auto mt-6 relative">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-gradient-to-tr from-[#B8860B] via-[#FFD700] to-[#B8860B] rotate-45 shadow-[0_0_10px_rgba(255,215,0,0.8)]" />
+          </div>
         </motion.div>
 
         <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 md:gap-8 pb-12 px-4 md:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">

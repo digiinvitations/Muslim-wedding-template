@@ -24,12 +24,15 @@ export default function Gallery() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-16 relative"
         >
-          <h2 className="text-4xl md:text-5xl text-emerald-900 font-serif tracking-wide capitalize">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-20 bg-[#FFD700]/10 rounded-full blur-2xl -z-10" />
+          <h2 className="text-4xl md:text-5xl font-serif tracking-wide capitalize bg-gradient-to-r from-[#B8860B] via-[#FFD700] to-[#B8860B] text-transparent bg-clip-text drop-shadow-sm pb-2">
             Togetherness
           </h2>
-          <div className="h-px w-24 bg-[#d4af37]/50 mx-auto mt-6" />
+          <div className="h-px w-24 bg-gradient-to-r from-transparent via-[#FFD700] to-transparent mx-auto mt-6 relative">
+             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-gradient-to-tr from-[#B8860B] via-[#FFD700] to-[#B8860B] rotate-45 shadow-[0_0_10px_rgba(255,215,0,0.8)]" />
+          </div>
         </motion.div>
 
         <div className="relative h-[60vh] md:h-[70vh] flex items-center justify-center w-full max-w-5xl mx-auto perspective-[1000px]">

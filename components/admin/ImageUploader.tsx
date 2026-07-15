@@ -45,7 +45,7 @@ export default function ImageUploader({ label, value, onChange, accept = "image/
         let height = img.height;
         
         // Max width/height
-        const MAX_SIZE = 1200;
+        const MAX_SIZE = 1920;
         if (width > height) {
           if (width > MAX_SIZE) {
             height *= MAX_SIZE / width;
@@ -92,7 +92,7 @@ export default function ImageUploader({ label, value, onChange, accept = "image/
               (error) => {
                 console.error("Upload failed, falling back to Base64:", error);
                 // Fallback to Base64 if Storage fails
-                const base64String = canvas.toDataURL("image/webp", 0.5);
+                const base64String = canvas.toDataURL("image/webp", 0.8);
                 onChange(base64String);
                 setIsUploading(false);
                 setProgress(100);
@@ -102,7 +102,7 @@ export default function ImageUploader({ label, value, onChange, accept = "image/
                   const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
                   onChange(downloadURL);
                 } catch(e) {
-                  const base64String = canvas.toDataURL("image/webp", 0.5);
+                  const base64String = canvas.toDataURL("image/webp", 0.8);
                   onChange(base64String);
                 }
                 setIsUploading(false);
@@ -115,7 +115,7 @@ export default function ImageUploader({ label, value, onChange, accept = "image/
             setIsUploading(false);
             setProgress(0);
           }
-        }, "image/webp", 0.8);
+        }, "image/webp", 0.95);
       };
     };
     reader.onerror = () => {

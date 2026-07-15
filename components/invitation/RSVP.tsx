@@ -68,10 +68,19 @@ export default function RSVP() {
           viewport={{ once: true }}
           className="w-full"
         >
-          <div className="bg-gradient-to-br from-emerald-50 to-white p-8 md:p-10 rounded-2xl border border-[#d4af37]/40 shadow-sm text-center">
-            <h2 className="text-3xl md:text-4xl text-emerald-900 font-serif tracking-wide mb-8">
-              RSVP
-            </h2>
+          <div className="bg-gradient-to-br from-emerald-50 to-white p-8 md:p-10 rounded-2xl border border-[#d4af37]/40 shadow-sm text-center relative">
+            <div className="absolute top-0 right-0 w-16 h-16 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-10 border-l border-b border-[#d4af37]/30 rounded-bl-2xl rounded-tr-xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-16 h-16 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-10 border-r border-t border-[#d4af37]/30 rounded-tr-2xl rounded-bl-xl pointer-events-none" />
+            
+            <div className="absolute -top-3 -right-3 w-6 h-6 bg-gradient-to-tr from-[#B8860B] via-[#FFD700] to-[#B8860B] rotate-45 shadow-[0_0_15px_rgba(255,215,0,0.6)] z-20" />
+            <div className="absolute -bottom-3 -left-3 w-6 h-6 bg-gradient-to-tr from-[#B8860B] via-[#FFD700] to-[#B8860B] rotate-45 shadow-[0_0_15px_rgba(255,215,0,0.6)] z-20" />
+
+            <div className="relative mb-8 inline-block">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-16 bg-[#FFD700]/10 rounded-full blur-2xl -z-10" />
+              <h2 className="text-3xl md:text-4xl font-serif tracking-wide bg-gradient-to-r from-[#B8860B] via-[#FFD700] to-[#B8860B] text-transparent bg-clip-text drop-shadow-sm pb-1">
+                RSVP
+              </h2>
+            </div>
 
             {rsvpStatus === "success" ? (
               <motion.div 
@@ -139,7 +148,7 @@ export default function RSVP() {
                 <button 
                   type="submit"
                   disabled={rsvpStatus === "submitting"}
-                  className="w-full bg-[#d4af37] hover:bg-[#b8860b] text-white font-medium py-4 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-70 uppercase tracking-widest text-sm mt-4 shadow-sm"
+                  className="w-full bg-gradient-to-r from-[#B8860B] via-[#FFD700] to-[#B8860B] bg-[length:200%_auto] hover:bg-[position:right_center] text-emerald-950 font-bold py-4 rounded-lg transition-all flex items-center justify-center gap-2 disabled:opacity-70 uppercase tracking-widest text-sm mt-4 shadow-[0_4px_15px_rgba(255,215,0,0.3)] hover:shadow-[0_4px_25px_rgba(255,215,0,0.5)] border border-[#FFD700]/50"
                 >
                   {rsvpStatus === "submitting" ? "Sending..." : (
                     <>

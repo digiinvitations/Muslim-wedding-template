@@ -85,7 +85,10 @@ export function WeddingProvider({ children }: { children: React.ReactNode }) {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        setDataState(prev => ({ ...prev, ...parsed }));
+        // Defer local storage fallback state update to avoid synchronous state update in effect warning
+        setTimeout(() => {
+          setDataState(prev => ({ ...prev, ...parsed }));
+        }, 0);
       } catch (e) {
         console.error("Failed to parse local storage wedding data", e);
       }

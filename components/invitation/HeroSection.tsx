@@ -16,17 +16,21 @@ export default function HeroSection() {
       <div className="absolute inset-[20px] md:inset-[38px] border-2 border-emerald-800/20 pointer-events-none z-10 rounded-xl" />
 
       {/* Ornate Corners */}
-      <div className="absolute top-6 left-6 md:top-10 md:left-10 w-12 h-12 md:w-20 md:h-20 border-t-4 border-l-4 border-[#d4af37] rounded-tl-xl opacity-80 z-10 pointer-events-none" />
+      <div className="absolute top-6 left-6 md:top-10 md:left-10 w-12 h-12 md:w-20 md:h-20 border-t-4 border-l-4 border-transparent [border-image:linear-gradient(to_bottom_right,#B8860B,#FFD700,#B8860B)_1] rounded-tl-xl opacity-80 z-10 pointer-events-none" />
       <div className="absolute top-8 left-8 md:top-14 md:left-14 w-8 h-8 md:w-12 md:h-12 border-t-2 border-l-2 border-[#d4af37] rounded-tl-lg opacity-60 z-10 pointer-events-none" />
+      <div className="absolute top-6 left-6 md:top-10 md:left-10 w-3 h-3 md:w-4 md:h-4 bg-gradient-to-tr from-[#B8860B] via-[#FFD700] to-[#B8860B] rotate-45 -translate-x-1/2 -translate-y-1/2 shadow-[0_0_15px_rgba(255,215,0,0.6)] z-20" />
       
-      <div className="absolute top-6 right-6 md:top-10 md:right-10 w-12 h-12 md:w-20 md:h-20 border-t-4 border-r-4 border-[#d4af37] rounded-tr-xl opacity-80 z-10 pointer-events-none" />
+      <div className="absolute top-6 right-6 md:top-10 md:right-10 w-12 h-12 md:w-20 md:h-20 border-t-4 border-r-4 border-transparent [border-image:linear-gradient(to_bottom_left,#B8860B,#FFD700,#B8860B)_1] rounded-tr-xl opacity-80 z-10 pointer-events-none" />
       <div className="absolute top-8 right-8 md:top-14 md:right-14 w-8 h-8 md:w-12 md:h-12 border-t-2 border-r-2 border-[#d4af37] rounded-tr-lg opacity-60 z-10 pointer-events-none" />
+      <div className="absolute top-6 right-6 md:top-10 md:right-10 w-3 h-3 md:w-4 md:h-4 bg-gradient-to-tr from-[#B8860B] via-[#FFD700] to-[#B8860B] rotate-45 translate-x-1/2 -translate-y-1/2 shadow-[0_0_15px_rgba(255,215,0,0.6)] z-20" />
       
-      <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 w-12 h-12 md:w-20 md:h-20 border-b-4 border-l-4 border-[#d4af37] rounded-bl-xl opacity-80 z-10 pointer-events-none" />
+      <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 w-12 h-12 md:w-20 md:h-20 border-b-4 border-l-4 border-transparent [border-image:linear-gradient(to_top_right,#B8860B,#FFD700,#B8860B)_1] rounded-bl-xl opacity-80 z-10 pointer-events-none" />
       <div className="absolute bottom-8 left-8 md:bottom-14 md:left-14 w-8 h-8 md:w-12 md:h-12 border-b-2 border-l-2 border-[#d4af37] rounded-bl-lg opacity-60 z-10 pointer-events-none" />
+      <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 w-3 h-3 md:w-4 md:h-4 bg-gradient-to-tr from-[#B8860B] via-[#FFD700] to-[#B8860B] rotate-45 -translate-x-1/2 translate-y-1/2 shadow-[0_0_15px_rgba(255,215,0,0.6)] z-20" />
       
-      <div className="absolute bottom-6 right-6 md:bottom-10 md:right-10 w-12 h-12 md:w-20 md:h-20 border-b-4 border-r-4 border-[#d4af37] rounded-br-xl opacity-80 z-10 pointer-events-none" />
+      <div className="absolute bottom-6 right-6 md:bottom-10 md:right-10 w-12 h-12 md:w-20 md:h-20 border-b-4 border-r-4 border-transparent [border-image:linear-gradient(to_top_left,#B8860B,#FFD700,#B8860B)_1] rounded-br-xl opacity-80 z-10 pointer-events-none" />
       <div className="absolute bottom-8 right-8 md:bottom-14 md:right-14 w-8 h-8 md:w-12 md:h-12 border-b-2 border-r-2 border-[#d4af37] rounded-br-lg opacity-60 z-10 pointer-events-none" />
+      <div className="absolute bottom-6 right-6 md:bottom-10 md:right-10 w-3 h-3 md:w-4 md:h-4 bg-gradient-to-tr from-[#B8860B] via-[#FFD700] to-[#B8860B] rotate-45 translate-x-1/2 translate-y-1/2 shadow-[0_0_15px_rgba(255,215,0,0.6)] z-20" />
 
       {/* Background Elements */}
       <div className="absolute inset-0 z-0">
@@ -75,11 +79,11 @@ export default function HeroSection() {
         </p>
 
         <div className="py-12 space-y-6 flex flex-col items-center">
-          <h1 className="text-6xl md:text-8xl font-serif text-[#b8860b] font-light">
+          <h1 className="text-6xl md:text-8xl font-serif font-light bg-gradient-to-r from-[#B8860B] via-[#FFD700] to-[#B8860B] text-transparent bg-clip-text drop-shadow-sm">
             {data.hero.groomName.split(' ')[0]}
           </h1>
           <span className="text-emerald-800/40 text-3xl">❤</span>
-          <h1 className="text-6xl md:text-8xl font-serif text-[#b8860b] font-light">
+          <h1 className="text-6xl md:text-8xl font-serif font-light bg-gradient-to-r from-[#B8860B] via-[#FFD700] to-[#B8860B] text-transparent bg-clip-text drop-shadow-sm">
             {data.hero.brideName.split(' ')[0]}
           </h1>
         </div>
