@@ -56,13 +56,14 @@ export default function Ceremonies() {
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-80 z-20" />
               )}
               
-              <div className="w-full h-48 md:h-64 relative bg-emerald-950 flex items-center justify-center">
+              <div className="w-full relative bg-emerald-950 flex items-center justify-center">
                 {ceremony.thumbnailUrl && (
                   <Image 
                     src={formatImageUrl(ceremony.thumbnailUrl)}
                     alt={ceremony.name}
-                    fill
-                    className="object-contain"
+                    width={1200}
+                    height={800}
+                    className="w-full h-auto"
                     referrerPolicy="no-referrer"
                   />
                 )}
