@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, collection, getDocs, query, orderBy } from 'firebase/firestore';
 
 export async function GET(
   request: Request,
@@ -22,7 +22,19 @@ export async function GET(
     }
 
     const data = docSnap.data();
-    const base64Data = data.data;
+    let base64Data = data.data;
+
+    if (data.chunks) {
+      // Assemble chunks
+      let assembledData = "";
+      for (let i = 0; i < data.chunks; i++) {
+        const chunkSnap = await getDoc(doc(db, `uploaded_images/${id}/chunks`, `chunk_${i}`));
+        if (chunkSnap.exists()) {
+          assembledData += chunkSnap.data().data;
+        }
+      }
+      base64Data = assembledData;
+    }
 
     if (!base64Data) {
       return new NextResponse('Not Found', { status: 404 });
@@ -31,6 +43,7 @@ export async function GET(
     // Extract mime type and base64 string
     // Format is typically "data:image/webp;base64,UklGR..."
     const matches = base64Data.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+
     
     if (!matches || matches.length !== 3) {
       // If it doesn't match the format, return as is (might be a normal URL)

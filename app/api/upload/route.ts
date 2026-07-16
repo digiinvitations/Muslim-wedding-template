@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
 
-// Max request size in Next.js is usually 4MB by default for API routes
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -12,16 +11,28 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'No image provided' }, { status: 400 });
     }
 
-    // Save to Firestore
+    // A Firestore document is limited to 1MB. We'll chunk the string to 800KB pieces.
+    const chunkSize = 800 * 1024;
+    const numChunks = Math.ceil(image.length / chunkSize);
+
+    // Create the main document
     const docRef = await addDoc(collection(db, 'uploaded_images'), {
-      data: image,
+      chunks: numChunks,
       timestamp: new Date().toISOString()
     });
+
+    // Upload chunks
+    for (let i = 0; i < numChunks; i++) {
+      const chunkData = image.substring(i * chunkSize, (i + 1) * chunkSize);
+      await setDoc(doc(db, `uploaded_images/${docRef.id}/chunks`, `chunk_${i}`), {
+        data: chunkData,
+        index: i
+      });
+    }
 
     return NextResponse.json({ url: `/api/image/${docRef.id}` });
   } catch (error: any) {
     console.error('Upload API error:', error);
-    // If it's a payload too large error from firestore, return 413
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
