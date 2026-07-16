@@ -56,17 +56,18 @@ export default function Ceremonies() {
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-80 z-20" />
               )}
               
-              <div className="w-full h-48 md:h-64 relative">
+              <div className="w-full h-48 md:h-64 relative bg-emerald-950 flex items-center justify-center">
                 {ceremony.thumbnailUrl && (
                   <Image 
                     src={formatImageUrl(ceremony.thumbnailUrl)}
                     alt={ceremony.name}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                     referrerPolicy="no-referrer"
                   />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-full p-6">
                   <h3 className="text-3xl font-serif text-white">
                     {ceremony.name}
                   </h3>
@@ -93,7 +94,7 @@ export default function Ceremonies() {
                   {ceremony.mapUrl && (
                     <div className="pt-2">
                       <a 
-                        href={ceremony.mapUrl} 
+                        href={ceremony.mapUrl.includes('<iframe') ? `https://maps.google.com/maps?q=${encodeURIComponent(ceremony.venue)}` : ceremony.mapUrl} 
                         target="_blank" 
                         rel="noreferrer"
                         className="inline-block px-8 py-3 rounded-full border border-[#d4af37] text-[#b8860b] hover:bg-[#d4af37] hover:text-white transition-colors tracking-widest text-sm uppercase"
@@ -111,7 +112,18 @@ export default function Ceremonies() {
                     style={{ border: 0 }}
                     loading="lazy"
                     allowFullScreen
-                    src={`https://maps.google.com/maps?q=${encodeURIComponent(ceremony.venue)}&t=&z=14&ie=UTF8&iwloc=&output=embed`}
+                    src={((): string => {
+                      if (ceremony.mapUrl) {
+                        if (ceremony.mapUrl.includes('<iframe')) {
+                          const match = ceremony.mapUrl.match(/src="([^"]+)"/);
+                          if (match) return match[1];
+                        }
+                        if (ceremony.mapUrl.includes('google.com/maps/embed')) {
+                          return ceremony.mapUrl;
+                        }
+                      }
+                      return `https://maps.google.com/maps?q=${encodeURIComponent(ceremony.venue)}&t=&z=14&ie=UTF8&iwloc=&output=embed`;
+                    })()}
                   ></iframe>
                 </div>
               </div>

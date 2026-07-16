@@ -45,7 +45,7 @@ export default function ImageUploader({ label, value, onChange, accept = "image/
         let height = img.height;
         
         // Max width/height
-        const MAX_SIZE = 600;
+        const MAX_SIZE = 1920;
         if (width > height) {
           if (width > MAX_SIZE) {
             height *= MAX_SIZE / width;
@@ -76,17 +76,34 @@ export default function ImageUploader({ label, value, onChange, accept = "image/
           }
           
           try {
-            // Directly use Base64 to bypass Firebase Storage CORS and setup issues
+            const base64String = canvas.toDataURL("image/webp", 0.9);
+            
+            // Upload to our new Next.js API route to bypass Firebase Storage CORS
+            // and store in Firestore documents individually to avoid 1MB document limits.
+            const response = await fetch('/api/upload', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ image: base64String }),
+            });
+            
+            if (!response.ok) {
+               throw new Error("Upload failed");
+            }
+            
+            const data = await response.json();
+            onChange(data.url);
+            
+            setIsUploading(false);
+            setProgress(100);
+          } catch (err) {
+            console.error("Upload error:", err);
+            // Fallback to storing base64 directly if API fails
             const base64String = canvas.toDataURL("image/webp", 0.7);
             onChange(base64String);
             setIsUploading(false);
             setProgress(100);
-          } catch (err) {
-            console.error("Encoding error:", err);
-            setIsUploading(false);
-            setProgress(100);
           }
-        }, "image/webp", 0.7);
+        }, "image/webp", 0.9);
       };
     };
     reader.onerror = () => {
