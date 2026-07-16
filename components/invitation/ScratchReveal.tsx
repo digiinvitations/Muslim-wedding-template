@@ -194,7 +194,7 @@ export default function ScratchReveal() {
   ];
 
   return (
-    <section className="py-24 bg-white flex flex-col items-center justify-center relative px-4">
+    <section className="py-24 bg-emerald-50 flex flex-col items-center justify-center relative px-4">
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-[0.02]" />
       
       <motion.div
@@ -210,7 +210,7 @@ export default function ScratchReveal() {
 
       <div 
         ref={containerRef}
-        className="relative w-full max-w-sm h-48 md:h-64 rounded-xl shadow-[0_0_40px_rgba(212,175,55,0.2)] overflow-hidden bg-white border border-[#d4af37]/50 flex flex-col items-center justify-center p-6 z-10"
+        className="relative w-full max-w-sm h-48 md:h-64 rounded-xl shadow-[0_0_40px_rgba(212,175,55,0.2)] overflow-hidden bg-emerald-50 border border-[#d4af37]/50 flex flex-col items-center justify-center p-6 z-10"
       >
         {/* Hidden Date */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center space-y-4">

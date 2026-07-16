@@ -10,7 +10,7 @@ export default function HeroSection() {
   const { data } = useWedding();
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-emerald-50 to-white text-center px-4 py-20">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-emerald-50 to-emerald-100 text-center px-4 py-20">
       {/* Decorative Green Border */}
       <div className="absolute inset-4 md:inset-8 border border-emerald-800/40 pointer-events-none z-10 rounded-2xl" />
       <div className="absolute inset-[20px] md:inset-[38px] border-2 border-emerald-800/20 pointer-events-none z-10 rounded-xl" />

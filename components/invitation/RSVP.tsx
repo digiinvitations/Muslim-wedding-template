@@ -57,7 +57,7 @@ export default function RSVP() {
   };
 
   return (
-    <section className="py-24 bg-white px-4 relative overflow-hidden">
+    <section className="py-24 bg-emerald-50 px-4 relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-[0.02]" />
       <div className="max-w-xl mx-auto relative z-10">
         
@@ -68,7 +68,7 @@ export default function RSVP() {
           viewport={{ once: true }}
           className="w-full"
         >
-          <div className="bg-gradient-to-br from-emerald-50 to-white p-8 md:p-10 rounded-2xl border border-[#d4af37]/40 shadow-sm text-center relative">
+          <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 p-8 md:p-10 rounded-2xl border border-[#d4af37]/40 shadow-sm text-center relative">
             <div className="absolute top-0 right-0 w-16 h-16 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-10 border-l border-b border-[#d4af37]/30 rounded-bl-2xl rounded-tr-xl pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-16 h-16 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-10 border-r border-t border-[#d4af37]/30 rounded-tr-2xl rounded-bl-xl pointer-events-none" />
             

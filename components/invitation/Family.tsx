@@ -6,7 +6,7 @@ export default function Family() {
   const { data } = useWedding();
 
   return (
-    <section className="pt-12 pb-24 bg-white px-4 relative">
+    <section className="pt-12 pb-24 bg-emerald-50 px-4 relative">
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-[0.02]" />
       
       {/* Family Section */}

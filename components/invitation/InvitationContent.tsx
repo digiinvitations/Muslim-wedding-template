@@ -15,7 +15,7 @@ import { MoonStar } from "lucide-react";
 import NextLink from "next/link";
 
 const Divider = () => (
-  <div className="flex items-center justify-center py-16 bg-white relative z-20 overflow-hidden">
+  <div className="flex items-center justify-center py-16 bg-emerald-50 relative z-20 overflow-hidden">
     <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-[0.02]" />
     <div className="w-24 md:w-48 h-[2px] bg-gradient-to-r from-transparent via-[#FFD700]/60 to-[#FFD700]/10" />
     <div className="mx-6 text-[#FFD700] flex items-center gap-2 relative drop-shadow-[0_0_8px_rgba(255,215,0,0.8)]">
@@ -54,7 +54,7 @@ export default function InvitationContent() {
       <RSVP />
       
       {/* Thank You / Outro */}
-      <section className="min-h-[50vh] flex flex-col items-center justify-center text-center p-8 bg-gradient-to-b from-white to-emerald-50 relative overflow-hidden">
+      <section className="min-h-[50vh] flex flex-col items-center justify-center text-center p-8 bg-gradient-to-b from-emerald-50 to-emerald-100 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-10 z-0" />
         <div className="relative z-10 space-y-6">
           <div className="relative inline-block mb-4">

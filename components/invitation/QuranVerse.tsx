@@ -6,7 +6,7 @@ export default function QuranVerse() {
   const { data } = useWedding();
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-emerald-50 relative px-4 flex justify-center items-center">
+    <section className="py-24 bg-gradient-to-b from-emerald-50 to-emerald-100 relative px-4 flex justify-center items-center">
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-[0.03]" />
       
       <motion.div 

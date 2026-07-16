@@ -10,7 +10,7 @@ export default function Ceremonies() {
   const enabledCeremonies = data.ceremonies.filter(c => c.enabled);
 
   return (
-    <section className="py-24 bg-white px-4 relative overflow-hidden">
+    <section className="py-24 bg-emerald-50 px-4 relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-[0.02]" />
       
       {/* Decorative Ornaments */}
@@ -49,7 +49,7 @@ export default function Ceremonies() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               className={`min-w-[90vw] md:min-w-[500px] lg:min-w-[600px] snap-center shrink-0 rounded-xl border border-[#d4af37]/30 backdrop-blur-sm relative overflow-hidden group hover:border-[#d4af37]/60 transition-colors shadow-sm ${
-                ceremony.id === 'nikah' ? 'bg-gradient-to-br from-emerald-50 to-white shadow-[0_4px_30px_rgba(212,175,55,0.15)]' : 'bg-white'
+                ceremony.id === 'nikah' ? 'bg-gradient-to-br from-emerald-50 to-emerald-100 shadow-[0_4px_30px_rgba(212,175,55,0.15)]' : 'bg-emerald-50'
               }`}
             >
               {ceremony.id === 'nikah' && (

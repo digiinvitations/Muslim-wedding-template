@@ -8,7 +8,7 @@ export default function BrideGroomIntro() {
   const { data } = useWedding();
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-emerald-50 relative px-4">
+    <section className="py-24 bg-gradient-to-b from-emerald-50 to-emerald-100 relative px-4">
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-[0.03] z-0" />
       
       {/* Decorative Ornaments */}
@@ -34,7 +34,7 @@ export default function BrideGroomIntro() {
           className="flex flex-col md:flex-row items-center gap-12"
         >
           <div className="w-full md:w-1/2 flex justify-center">
-            <div className="relative w-64 h-80 md:w-80 md:h-[400px] rounded-t-full rounded-b-xl overflow-hidden border-2 border-[#d4af37]/60 shadow-[0_0_40px_rgba(212,175,55,0.2)] p-2 bg-white">
+            <div className="relative w-64 h-80 md:w-80 md:h-[400px] rounded-t-full rounded-b-xl overflow-hidden border-2 border-[#d4af37]/60 shadow-[0_0_40px_rgba(212,175,55,0.2)] p-2 bg-emerald-50">
               <div className="relative w-full h-full rounded-t-full rounded-b-lg overflow-hidden">
                 <Image 
                   src={formatImageUrl(data.couple.groomImage)} 
@@ -64,7 +64,7 @@ export default function BrideGroomIntro() {
           className="flex justify-center items-center py-4 relative"
         >
           <div className="absolute w-32 h-px bg-gradient-to-r from-transparent via-[#d4af37]/50 to-transparent z-0" />
-          <div className="w-16 h-16 rounded-full border border-transparent [background:linear-gradient(white,white)_padding-box,linear-gradient(to_bottom_right,#B8860B,#FFD700,#B8860B)_border-box] flex items-center justify-center bg-white shadow-[0_0_20px_rgba(255,215,0,0.2)] z-20 relative">
+          <div className="w-16 h-16 rounded-full border border-transparent [background:linear-gradient(#ecfdf5,#ecfdf5)_padding-box,linear-gradient(to_bottom_right,#B8860B,#FFD700,#B8860B)_border-box] flex items-center justify-center bg-emerald-50 shadow-[0_0_20px_rgba(255,215,0,0.2)] z-20 relative">
             <span className="text-3xl font-serif bg-gradient-to-br from-[#B8860B] via-[#FFD700] to-[#B8860B] text-transparent bg-clip-text">&amp;</span>
           </div>
         </motion.div>
@@ -78,7 +78,7 @@ export default function BrideGroomIntro() {
           className="flex flex-col md:flex-row-reverse items-center gap-12"
         >
           <div className="w-full md:w-1/2 flex justify-center">
-            <div className="relative w-64 h-80 md:w-80 md:h-[400px] rounded-t-full rounded-b-xl overflow-hidden border-2 border-[#d4af37]/60 shadow-[0_0_40px_rgba(212,175,55,0.2)] p-2 bg-white">
+            <div className="relative w-64 h-80 md:w-80 md:h-[400px] rounded-t-full rounded-b-xl overflow-hidden border-2 border-[#d4af37]/60 shadow-[0_0_40px_rgba(212,175,55,0.2)] p-2 bg-emerald-50">
               <div className="relative w-full h-full rounded-t-full rounded-b-lg overflow-hidden">
                 <Image 
                   src={formatImageUrl(data.couple.brideImage)} 

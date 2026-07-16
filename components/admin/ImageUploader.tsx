@@ -45,7 +45,7 @@ export default function ImageUploader({ label, value, onChange, accept = "image/
         let height = img.height;
         
         // Max width/height
-        const MAX_SIZE = 1920;
+        const MAX_SIZE = 600;
         if (width > height) {
           if (width > MAX_SIZE) {
             height *= MAX_SIZE / width;
@@ -76,46 +76,17 @@ export default function ImageUploader({ label, value, onChange, accept = "image/
           }
           
           try {
-            // Import dynamically to avoid SSR issues
-            const { storage } = await import("@/lib/firebase");
-            const { ref, uploadBytesResumable, getDownloadURL } = await import("firebase/storage");
-            
-            const filename = `uploads/img_${Date.now()}_${Math.random().toString(36).substring(7)}.webp`;
-            const storageRef = ref(storage, filename);
-            const uploadTask = uploadBytesResumable(storageRef, blob, { contentType: 'image/webp' });
-            
-            uploadTask.on('state_changed', 
-              (snapshot) => {
-                const prog = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                setProgress(Math.max(20, prog));
-              },
-              (error) => {
-                console.error("Upload failed, falling back to Base64:", error);
-                // Fallback to Base64 if Storage fails
-                const base64String = canvas.toDataURL("image/webp", 0.8);
-                onChange(base64String);
-                setIsUploading(false);
-                setProgress(100);
-              },
-              async () => {
-                try {
-                  const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-                  onChange(downloadURL);
-                } catch(e) {
-                  const base64String = canvas.toDataURL("image/webp", 0.8);
-                  onChange(base64String);
-                }
-                setIsUploading(false);
-                setProgress(100);
-              }
-            );
-          } catch (err) {
-            console.error("Storage error:", err);
-            alert("Firebase Storage error. Ensure Storage is enabled in your Firebase project.");
+            // Directly use Base64 to bypass Firebase Storage CORS and setup issues
+            const base64String = canvas.toDataURL("image/webp", 0.7);
+            onChange(base64String);
             setIsUploading(false);
-            setProgress(0);
+            setProgress(100);
+          } catch (err) {
+            console.error("Encoding error:", err);
+            setIsUploading(false);
+            setProgress(100);
           }
-        }, "image/webp", 0.95);
+        }, "image/webp", 0.7);
       };
     };
     reader.onerror = () => {
